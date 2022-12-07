@@ -5,6 +5,7 @@ import { MdClose } from "react-icons/md";
 import "./Modal.css";
 import { Button, Input } from "antd";
 import { ButtonStyled } from "../Button/buttons";
+import { Passsword} from "./Password"
 
 const Background = styled.div`
   width: 100%;
@@ -86,13 +87,13 @@ export const Modal = ({ showModal, setShowModal, title }) => {
             <ModalWrapper showModal={showModal}>
               <ModalContent>
                 <h1 className="mt-8">{title}</h1>
-                <Input className="w-3/5" />
+                <Input className="w-3/5"></Input>
                 <div className="footer">
                   <ButtonStyled className="w-20 h-10 mt-4 ml-4 pt-0 pl-[10px]" onClick={() => setShowModal((prev) => !prev)}>
-                    Cancel
+                    Ok
                   </ButtonStyled>
                   <Button className="w-20 h-10 mt-4 ml-4 pt-0 pl-7" onClick={() => setShowModal((prev) => !prev)}>
-                    OK
+                    Cancel
                   </Button>
                 </div>
               </ModalContent>

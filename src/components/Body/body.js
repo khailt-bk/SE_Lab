@@ -1,17 +1,22 @@
 import { React, useEffect, useState } from "react";
-import { Table, Button } from "antd";
+// import { Table, Button } from "antd";
 import { ButtonStyled } from "../Button/buttons";
 import Modal from "../Modal/Modal";
 import ModalAnm from "../ModalAnnoucement/ModalAnm";
 import "./body.css";
 import { TableDemo } from "../Table/table";
 import PopUpData, { PopUpMcp } from "../PopUp/popup";
+import axios from "axios";
 
 export const BodyDemo = () => {
     const [showModal, setShowModal] = useState(false);
     const [showModalAnm, setShowModalAnm] = useState(false);
     const [showPopUpData, setShowPopUpData] = useState(false);
     const [showPopUpMcp, setShowPopUpMcp] = useState(false);
+
+    // const [data, setData] = useState(null);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(null);
 
     const openModal = () => {
         setShowModal((prev) => !prev);
@@ -24,6 +29,7 @@ export const BodyDemo = () => {
     // const openModalData = () => {
     //     setShowPopUpData((prev) => !prev)
     // }
+
     const dataSource = [
         {
             key: "1",
@@ -45,22 +51,33 @@ export const BodyDemo = () => {
         },
     ];
 
-    // var postApi = 'https://jsonplaceholder.typicode.com/posts'
-
-    // const dataSource = [
-    //     fetch(postApi)
+    // var postApi = 'https://randomuser.me/api'
+    // fetch(postApi)
     //     .then(function(response) {
-    //       return response.json();
+    //         return response.json();
     //     })
-    //     // .then(function(posts) {
-    //     //   var htmls = posts.map(function(post) {
-    //     //     return `<li>
-    //     //       <h2>${post.title}</h2>
-    //     //       <p>${post.body}</</p>
-    //     //     </li>`
-    //     //   });
-    //     // })
-    // ];
+    //     .then(function(man) {
+    //         console.log(man);
+    //     });
+    
+    const dataSource1 = fetch('https://jsonplaceholder.typicode.com/todos/1');
+    // useEffect (() => {
+    dataSource1
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(man) {
+            console.log(man);
+        });
+    // }, [])
+
+    // const dataSource = axios.get('https://jsonplaceholder.typicode.com/todos/1');
+    // dataSource
+    //     .then(res => {
+    //         const persons = res.data;
+    //         return persons;
+    //         console.log(res)
+    //     });
 
 
     const columns = [
@@ -98,17 +115,17 @@ export const BodyDemo = () => {
         },
     ];
 
-    const handleOnClickDetail = () => { }
+    // const handleOnClickDetail = () => { }
     const [state, setState] = useState([]);
-    const selectRow = (record) => {
-        const selectedRowKeys = [...state.selectedRowKeys];
-        if (selectedRowKeys.indexOf(record.key) >= 0) {
-            selectedRowKeys.splice(selectedRowKeys.indexOf(record.key), 1);
-        } else {
-            selectedRowKeys.push(record.key);
-        }
-        setState({ selectedRowKeys });
-    };
+    // const selectRow = (record) => {
+    //     const selectedRowKeys = [...state.selectedRowKeys];
+    //     if (selectedRowKeys.indexOf(record.key) >= 0) {
+    //         selectedRowKeys.splice(selectedRowKeys.indexOf(record.key), 1);
+    //     } else {
+    //         selectedRowKeys.push(record.key);
+    //     }
+    //     setState({ selectedRowKeys });
+    // };
     const onSelectedRowKeysChange = (selectedRowKeys) => {
         setState({ selectedRowKeys });
     };
@@ -124,7 +141,7 @@ export const BodyDemo = () => {
                 showModal={showModal}
                 setShowModal={setShowModal}
                 title="Nhập mật khẩu"
-                announcement='hehe'
+                // announcement='hehe'
             />
             <ModalAnm
                 showModal={showModalAnm}
@@ -140,7 +157,7 @@ export const BodyDemo = () => {
                 <div className="flex">
                     <div className="w-1/5"></div>
                     <TableDemo
-                        dataSource={dataSource}
+                        dataSource={dataSource} // +++++++++++ data +++++++++ 
                         columns={columns}
 
                         className="w-3/5 mt-10"
@@ -164,3 +181,4 @@ export const BodyDemo = () => {
         </>
     );
 };
+
